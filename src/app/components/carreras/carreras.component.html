@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="d-flex justify-content-between mt-4">
+        <h4>Carreras</h4>
+        <button class="btn btn-success" (click)="navigateToForm()">Agregar Carrera</button>
+    </div>
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Codigo</th>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of lstCarreras">
+                <td>{{item.id}}</td>
+                <td>{{item.codigoCarrera}}</td>
+                <td>{{item.nombreCarrera}}</td>
+                <td>
+                    <!-- Podemos enviar valores a metodos en el .ts de esta forma-->
+                    <button class="btn btn-primary" (click)="updateCarrera(item.id)">Actualizar</button>
+                    <button class="btn btn-danger" (click)="deleteCarrera($event)" value="{{item.id}}">Eliminar
+                        Carrera</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

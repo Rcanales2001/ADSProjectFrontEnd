@@ -1,0 +1,217 @@
+<div class="container">
+    <div class="mt-4">
+        <h3>Agregar Grupo</h3>
+    </div>
+    <form class="mt-4" [formGroup]="form">
+
+        <div class="form-group mt-2">
+            <label>Carrera: </label>
+
+            <div id="baseCarrera" class="mx-auto">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCarrera">
+                    Seleccionar Carrera
+                </button>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="modalCarrera" tabindex="-1" role="dialog" aria-labelledby="modalCarrera"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalCarrera">Seleccionar carrera</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Seleccionado</th>
+                                            <th>Codigo</th>
+                                            <th>Nombre</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of lstCarreras">
+                                            <td><input type="radio" formControlName="carreraSeleccionada"
+                                                    value="{{item.id}}" /></td>
+                                            <td>{{item.codigoCarrera}}</td>
+                                            <td>{{item.nombreCarrera}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                    (click)="guardarSeleccionCarrera()">Guardar cambios</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div *ngIf="showSelectedCarrera(); else carreraN">
+                <ng-container *ngFor="let item of lstCarreras">
+                    <h6 *ngIf=" getActualSelectedCarrera() == item.id ">Carrera Seleccionada: {{item.nombreCarrera}}</h6>
+                </ng-container>
+            </div>         
+            <ng-template #carreraN><p>Carrera Seleccionada: Ninguno</p></ng-template>
+
+            <div class="invalid-feedback">
+                <span *ngIf="validateField('lblCarreraSeleccionada')">Este campo es requerido</span>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <div class="form-group mt-2">
+            <label>Materia: </label>
+
+            <div id="baseMateria" class="mx-auto">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalMateria">
+                    Seleccionar Materia
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modalMateria" tabindex="-1" role="dialog" aria-labelledby="modalMateria"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalMateria">Seleccionar Materia</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Seleccionado</th>
+                                            <th>Nombre</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of lstMaterias">
+                                            <td><input type="radio" formControlName="materiaSeleccionada"
+                                                    value="{{item.id}}" /></td>
+                                            <td>{{item.nombre}}</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                    (click)="guardarSeleccionMateria()">Guardar cambios</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <br>
+            <div *ngIf="showSelectedMateria(); else materiaN">
+                <ng-container *ngFor="let item of lstMaterias">
+                    <h6 *ngIf=" getActualSelectedMateria() == item.id ">Materia Seleccionada: {{item.nombre}}</h6>
+                </ng-container>
+            </div>         
+            <ng-template #materiaN><p>Materia Seleccionada: Ninguno</p></ng-template>
+        </div>
+
+        <hr>
+
+        <div class="form-group mt-2">
+            <label>Profesor: </label>
+
+            <div id="baseProfesor" class="mx-auto">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalProfesor">
+                    Seleccionar Profesor
+                </button>
+
+                 <!-- Modal -->
+                <div class="modal fade" id="modalProfesor" tabindex="-1" role="dialog" aria-labelledby="modalProfesor"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalProfesor">Seleccionar Profesor</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Seleccionado</th>
+                                            <th>Nombre</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of lstProfesores">
+                                            <td><input type="radio" formControlName="profesorSeleccionado"
+                                                    value="{{item.id}}" /></td>
+                                            <td>{{item.nombres}} {{item.apellidos}}</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                    (click)="guardarSeleccionProfesor()">Guardar cambios</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <br>
+            <div *ngIf="showSelectedProfesor(); else profesorN">
+                <ng-container *ngFor="let item of lstProfesores">
+                    <h6 *ngIf=" getActualSelectedProfesor() == item.id ">Profesor Seleccionado: {{item.nombres}} {{item.apellidos}} </h6>
+                </ng-container>
+            </div>         
+            <ng-template #profesorN><p>Profesor Seleccionado: Ninguno</p></ng-template>
+             
+
+        </div>
+
+        <hr>
+
+        <div class="form-group mt-2">
+            <label>Ciclo</label>
+            <input formControlName="ciclo" type="text" class="form-control" [class.is-invalid]="validateField('ciclo')"
+                placeholder="Ciclo concurrente">
+            <div class="invalid-feedback">
+                <span *ngIf="validateField('ciclo')">Este campo es requerido</span>
+            </div>
+        </div>
+
+        <div class="form-group mt-2">
+            <label>Año</label>
+            <input formControlName="anio" type="text" class="form-control" [class.is-invalid]="validateField('anio')"
+                placeholder="Año concurrente">
+                
+            <div class="invalid-feedback">
+                <span *ngIf="validateField('anio')">Este campo es requerido</span>
+            </div>
+        </div>
+        <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary" [disabled]="!form.valid" (click)="onSubmit()">Confirmar
+                informacion</button>
+        </div>
+    </form>
+</div>

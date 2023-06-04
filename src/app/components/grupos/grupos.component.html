@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="d-flex justify-content-between mt-4">
+        <h4>Grupos</h4>
+        <button class="btn btn-success" (click)="navigateToForm()">Agregar Grupos</button>
+    </div>
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Carrera</th>
+                <th>Materia</th>
+                <th>Profesor</th>
+                <th>Ciclo</th>
+                <th>Año</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of lstGrupos">
+                <td>{{item.id}}</td>
+                <td>{{item.idCarrera}}</td>
+                <td>{{item.idMateria}}</td>
+                <td>{{item.idProfesor}}</td>
+                <td>{{item.ciclo}}</td>
+                <td>{{item.anio}}</td>
+                <td>
+                    <!-- Podemos enviar valores a metodos en el .ts de esta forma-->
+                    <button class="btn btn-primary" (click)="updateGrupo(item.id)">Actualizar</button>
+                    <button class="btn btn-danger" (click)="deleteGrupo($event)" value="{{item.id}}">Eliminar Grupo</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

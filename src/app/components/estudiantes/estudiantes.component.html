@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="d-flex justify-content-between mt-4">
+        <h4>Estudiantes</h4>
+        <button class="btn btn-success" (click)="navigateToForm()">Agregar Estudiantes</button>
+    </div>
+    <table class="table table-bordered mt-4">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Email</th>
+                <th>Opciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of lstEstudiantes">
+                <td>{{item.codigo}}</td>
+                <td>{{item.nombres}}</td>
+                <td>{{item.apellidos}}</td>
+                <td>{{item.email}}</td>
+                <td>
+                    <!-- Podemos enviar valores a metodos en el .ts de esta forma-->
+                    <button class="btn btn-primary" (click)="updateEstudiante(item.id)">Actualizar</button>
+                    <button class="btn btn-danger" (click)="deleteEstudiante($event)" value="{{item.id}}">Eliminar
+                        Estudiantes</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
